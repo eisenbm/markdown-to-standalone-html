@@ -54,13 +54,16 @@ program.parse(process.argv)
 const inputFile: string = program.args[0]
 
 const fileContents = fs.readFileSync(inputFile, 'utf8')
-const mdLines = fileContents.split('\n')
+// const mdLines = fileContents.split('\n')
 
 // Retrieve the front matter
 const yaml = YAML.loadFront(fileContents)
 
+console.log(yaml.title)
+
 // Remove the front matter if present
-const mdContents = mdLines[0] === '---' ? mdLines.slice(mdLines.indexOf('---', 1) + 1).join('\n') : fileContents
+// const mdContents = mdLines[0] === '---' ? mdLines.slice(mdLines.indexOf('---', 1) + 1).join('\n') : fileContents
+const mdContents = yaml.__content
 
 const programOptions = program.opts()
 
