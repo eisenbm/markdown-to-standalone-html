@@ -39,9 +39,9 @@ commander_1.program.option('--toc-title <title>', 'the title used for the TOC', 
 commander_1.program.parse(process.argv);
 const inputFile = commander_1.program.args[0];
 const fileContents = fs_1.default.readFileSync(inputFile, 'utf8');
-const mdLines = fileContents.split('\n');
 const yaml = YAML.loadFront(fileContents);
-const mdContents = mdLines[0] === '---' ? mdLines.slice(mdLines.indexOf('---', 1) + 1).join('\n') : fileContents;
+console.log(yaml.title);
+const mdContents = yaml.__content;
 const programOptions = commander_1.program.opts();
 let outputFile = programOptions.output;
 if (outputFile === undefined) {
