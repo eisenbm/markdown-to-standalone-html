@@ -12,7 +12,7 @@ export default function urlimgToBase64Plugin (md: MarkdownIt, basePath = ''): vo
   md.renderer.rules.image = function (tokens, idx, options, env, self) {
     const token = tokens[idx]
     const src = token.attrGet('src')
-    if (src !== null && !src.includes(';base64,')) {
+    if (src !== null && !src.includes(';base64,') && !src.startsWith('http')) {
       let imgBuf = null
       try {
         imgBuf = fs.readFileSync(path.resolve(basePath, src))

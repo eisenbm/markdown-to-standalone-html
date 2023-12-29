@@ -13,7 +13,7 @@ function urlimgToBase64Plugin(md, basePath = '') {
     md.renderer.rules.image = function (tokens, idx, options, env, self) {
         const token = tokens[idx];
         const src = token.attrGet('src');
-        if (src !== null && !src.includes(';base64,')) {
+        if (src !== null && !src.includes(';base64,') && !src.startsWith('http')) {
             let imgBuf = null;
             try {
                 imgBuf = fs_1.default.readFileSync(path_1.default.resolve(basePath, src));
