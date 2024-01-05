@@ -158,11 +158,16 @@ export default async function markdownToStandAloneHtml (mdContents: string, {
   const titleMatch = main.match(titleRegex)
   const title = (titleMatch !== null) ? titleMatch[1] : 'Readme'
 
+  const slotRegex = /<slot>(.+?)<\/slot>/s
+  const slotMatch = main.match(slotRegex)
+  const slot = (slotMatch !== null) ? slotMatch[1] : ''
+
   const css = `<style type="text/css">${cssArr.join('\n')}</style>`
 
   const script = `<script>\n${scriptArr.join('\n</script>\n<script>\n')}\n</script>`
 
   templateStr = templateStr.replace('<!-- {{CSS}} -->', css)
+    .replace('<!-- {{SLOT}} -->', slot)
     .replace('<!-- {{MAIN}} -->', main)
     .replace('<!-- {{TITLE}} -->', title)
     .replace('<!-- {{SCRIPT}} -->', script)
